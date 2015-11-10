@@ -1,2 +1,2 @@
 # TeamFormProject
-"My favorite candy is candy corn!" 
+"My favorite candy are jelly beans, especially cherry!" 

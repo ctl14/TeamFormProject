@@ -16,7 +16,7 @@
   
 
 </head>
-<body ng-controller="TeamFormCtrl" class="container-fluid">
+<body ng-controller="TeamFormCtrl" class="container" novalidate>
   <header >
     <h1>Sign up</h1>
     <p>Our service</p>
@@ -26,6 +26,21 @@
     <div class="alert alert-success" ng-hide="submitted">
       Content has been submitted
     </div>
+
+
+    <div class="form-group" ng-class="{'has-error':teamForm.password.$invalid && teamForm.password.$touched}">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" class="form-control" placeholder="Your Password" ng-model="password" ng-change="verifyPassword()" required>
+      <p ng-show="teamForm.password.$invalid && teamForm.password.$touched" class="help-block">Please enter a password</p>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error':teamForm.confirmPassword.$invalid && teamForm.confirmPassword.$touched}">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm Your Password" ng-model="confirmPassword" ng-change="verifyPassword()" required>
+      <p ng-show="teamForm.confirmPassword.$error.text" class="help-block">Please re-type your password</p>
+      <p ng-show="teamForm.confirmPassword.$error.match" class="help-block">Passwords don't match</p>
+    </div>
+
     <button type="reset" class="btn" ng-click="reset()">Reset</button>
     <button type="submit" class="btn btn-primary" ng-click="submit()" ng-disabled="teamForm.$invalid">Sign Me Up!</button>
   </form>

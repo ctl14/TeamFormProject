@@ -20,7 +20,6 @@ describe('Team Form page', function() {
 		birthdateInput.sendKeys('011/243');
 		var first = element( by.id('firstName') );
         first.sendKeys('a');
-        browser.pause();
 		expect(dateInvalid.isDisplayed()).toEqual(true);
 	})
 
@@ -232,5 +231,29 @@ describe('Team Form page', function() {
 
 
 		expect( noInputMsg.isDisplayed() ).toEqual(true);
+	})
+
+	it('should enable the submit button when all fields are valid and the confirmation message should display', function () {
+		var birthdateInput = element(by.model('birthdate'));
+		var nameInput = element( by.model('lastName') );
+		var passwordInput = element( by.model('password') );
+		var confirmPasswordInput = element( by.model('confirmPassword') );
+		var emailInput = element( by.model('email') );
+		var submitButton = element( by.id('submitButton') );
+		var confirm = element( by.id('confirmationModal'));
+
+		birthdateInput.sendKeys('10/10/1010');
+		nameInput.sendKeys('a');
+		passwordInput.sendKeys('password');
+		confirmPasswordInput.sendKeys('password');
+		emailInput.sendKeys('a@f.com');
+
+		expect( submitButton.isEnabled()).toEqual(true);
+
+		submitButton.click();
+
+		expect( confirm.isDisplayed()).toEqual(true);
+
+
 	})
 });

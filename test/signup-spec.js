@@ -7,26 +7,33 @@ describe('Team Form page', function() {
 	
 	it('should display an error message when the last name field has been touched but has no input', function() {
         var nameInput = element( by.model('lastName') );
+        var first = element( by.id('firstName') );
 
         nameInput.sendKeys('a');
         nameInput.clear();
+        first.sendKeys('a');
 
         var nameError = element( by.id('nameError') );
-        expect(nameError.isDisplayed());
+        expect(nameError.isDisplayed()).toEqual(true);
     })
 
-    it('should not display an error message when nothing has been touched', function() {
+    it('should not display an error message when Last Name has been touched', function() {
+        var first = element( by.id('firstName') );
+        first.sendKeys('a');
+
         var nameError = element( by.id('nameError') );
-        expect(!nameError.isDisplayed());
+        expect(nameError.isDisplayed()).toEqual(false);
     })
 
-    it('should not display an error message when the last name filed has an input', function() {
+    it('should not display an error message when the last name field has an input', function() {
         var nameInput = element( by.model('lastName') );
+        var first = element( by.id('firstName') );
 
         nameInput.sendKeys('a');
+        first.sendKeys('a');
 
         var nameError = element( by.id('nameError') );
-        expect(!nameError.isDisplayed());
+        expect(nameError.isDisplayed()).toEqual(false);
     })
 
 	//////////////////////////////////////////////////////

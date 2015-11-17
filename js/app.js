@@ -17,6 +17,8 @@ angular.module('TeamFormApp', [])
         $scope.verifyBirthdate = function () {
             var enteredBirthdate = Date.parse($scope.birthdate);
             var oldEnough = (Date.now()-410240038000);
+
+            console.log($scope.teamForm.birthdate);
             //Case: if entered birthdate in not valid
             if(isNaN(enteredBirthdate)){
                 $scope.teamForm.birthdate.$setValidity("age", true);
@@ -26,9 +28,12 @@ angular.module('TeamFormApp', [])
                 $scope.teamForm.birthdate.$setValidity("age", true);
                 $scope.teamForm.birthdate.$setValidity("format", true);
                 //Case: if entered birthdate is not old enough
-            }else{
+            }else if (!isNaN(enteredBirthdate) && enteredBirthdate > oldEnough){
                 $scope.teamForm.birthdate.$setValidity("age", false);
                 $scope.teamForm.birthdate.$setValidity("format", true);
+            }else{
+                $scope.teamForm.birthdate.$setValidity("age", true);
+                $scope.teamForm.birthdate.$setValidity("format", false);
             }
         };
 

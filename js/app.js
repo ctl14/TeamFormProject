@@ -15,7 +15,7 @@ angular.module('TeamFormApp', [])
         location.reload();
     };
 
-    $scope.ageCheck = function () {
+    /*$scope.ageCheck = function () {
         //checks if the birthdate entered is over 13
         var birthdate = Date.parse($scope.birthdate);
         var oldEnough = (Date.now()-410240038000);
@@ -24,15 +24,20 @@ angular.module('TeamFormApp', [])
         }else{
             return false;
         }
-    };
+    };*/
 
-        $scope.validDate = function () {
-            //checks if birthdate is valid meaning a non Nan
-            var birthdate = Date.parse($scope.birthdate);
-            if(isNaN(birthdate)){
-                return false;
-            }else {
-                return true;
+        $scope.verifyBirthdate = function () {
+            var enteredBirthdate = Date.parse($scope.birthdate);
+            var oldEnough = (Date.now()-410240038000);
+            if(isNaN(enteredBirthdate)){
+                $scope.teamForm.birthdate.$setValidity("age", true);
+                $scope.teamForm.birthdate.$setValidity("format", false);
+            }else if (!isNaN(enteredBirthdate) && enteredBirthdate <= oldEnough ) {
+                $scope.teamForm.birthdate.$setValidity("age", true);
+                $scope.teamForm.birthdate.$setValidity("format", true);
+            }else{
+                $scope.teamForm.birthdate.$setValidity("age", false);
+                $scope.teamForm.birthdate.$setValidity("format", true);
             }
         };
 

@@ -152,7 +152,7 @@ describe('Team Form page', function() {
 		emailInput.sendKeys('husky@uw.edu');
 
 
-		expect( !noAtSignMsg.isDisplayed() );
+		expect( noAtSignMsg.isDisplayed()).toEqual(false);
 	})
 	//The user entered a valid email
 	it('should not say: You must enter a valid email', function() {
@@ -162,7 +162,7 @@ describe('Team Form page', function() {
 		emailInput.sendKeys('husky@uw.edu');
 
 
-		expect( !noInputMsg.isDisplayed() );
+		expect( noInputMsg.isDisplayed() ).toEqual(false);
 	})
 
 	//The user did not input an @ sign
@@ -173,7 +173,7 @@ describe('Team Form page', function() {
 		emailInput.sendKeys('husky');
 
 
-		expect( noAtSignMsg.isDisplayed() );
+		expect( noAtSignMsg.isDisplayed() ).toEqual(true);
 	})
 
 	//The user did not enter anything
@@ -183,7 +183,11 @@ describe('Team Form page', function() {
 
 		emailInput.sendKeys('');
 
+		//Select outside of the email input, so the message shows up
+		var first = element( by.id('firstName') );
+		first.sendKeys('name');
 
-		expect( noInputMsg.isDisplayed() );
+
+		expect( noInputMsg.isDisplayed() ).toEqual(true);
 	})
 });

@@ -4,42 +4,41 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <title>Signup Form</title>
-  
+
   <!-- bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="css/main.css"/>
 
   <!-- include libraries -->
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-  
+
 
 </head>
 <body ng-controller="TeamFormCtrl" class="container">
-  <header >
-    <h1>Sign up</h1>
-    <p>Our service is awesome, but you must be 13 or older to join</p>
-  </header>
-  <form class="form-horizontal" name="teamForm" novalidate>
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input type="text" class="form-control" name="firstName" id="firstName" placeholder="your first name">
+<header >
+  <h1>Sign up</h1>
+  <p>Our service</p>
+</header>
+<form class="form-horizontal" name="teamForm">
+
+  <div class="form-group" ng-class="{'has-error': teamForm.birthdate.$invalid && teamForm.birthdate.$touched}">
+  <label for="birthdate">Birthdate</label><br>
+  <input type="text" class= "form-control" name="birthdate" placeholder="your birthdate" id="birthdate" ng-keyup = "ageCheck()" ng-keyup = "validDate()" ng-model = "birthdate" required>
+    <p class="help-block" ng-show="!ageCheck() && teamForm.birthdate.$touched && validDate()" >sorry, you must be at least 13 to sign up</p>
+    <p class="help-block" ng-show="!validDate() && teamForm.birthdate.$touched">please enter a valid date</p>
     </div>
 
-    <div class="form-group" ng-class="{'has-error': teamForm.lastName.$invalid && teamForm.lastName.$touched}">
-      <label for="lastName">Last Name</label>
-      <input type="text" class="form-control" name="lastName" id="lastName" placeholder="your last name" ng-model="lastName" required ng-minlength="1">
-      <p class="help-block" ng-show="teamForm.lastName.$invalid && teamForm.lastName.$touched">We need to know your last name</p>
-    </div>
-    
-    <div class="alert alert-success" ng-hide="submitted">
-      Content has been submitted
-    </div>
-    <button type="reset" class="btn" ng-click="reset()">Reset</button>
-    <button type="submit" class="btn btn-primary" ng-click="submit(teamForm)" ng-disabled="teamForm.$invalid">Sign Me Up!</button>
-  </form>
+  <br>
 
-  <script src="js/app.js"></script>
+  <div class="alert alert-success" ng-hide="submitted">
+    Content has been submitted
+  </div>
+  <button type="reset" class="btn" ng-click="reset()">Reset</button>
+  <button type="submit" class="btn btn-primary" ng-click="submit()" ng-disabled="teamForm.$invalid">Sign Me Up!</button>
+</form>
+
+<script src="js/app.js"></script>
 </body>
 </html>

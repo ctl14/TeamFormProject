@@ -14,4 +14,30 @@ angular.module('TeamFormApp', [])
 
         location.reload();
     };
+
+    $scope.ageCheck = function () {
+        var birthdate = Date.parse($scope.birthdate);
+        var oldEnough = (Date.now()-410240038000);
+        if(birthdate <= oldEnough){
+            console.log("old enough");
+            return true;
+        }else{
+            console.log("Too Young");
+            return false;
+        }
+    };
+
+        $scope.validDate = function () {
+            var birthdate = Date.parse($scope.birthdate);
+            if(isNaN(birthdate)){
+                return false;
+            }else {
+                return true;
+            }
+        };
+
+
+
+
+
 }]);

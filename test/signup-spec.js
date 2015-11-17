@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Team Form page', function() {
 	beforeEach(function() {
 		browser.get('http://localhost:8000/');
@@ -7,13 +9,18 @@ describe('Team Form page', function() {
 		var birthdateInput = element(by.model('birthdate'));
 		var tooYoung = element(by.id('tooYoung'));
 		birthdateInput.sendKeys('01/22/2013');
+		var first = element( by.id('firstName') );
+        first.sendKeys('a');
 		expect(tooYoung.isDisplayed()).toEqual(true);
 	})
 
 	it('should show the need valid date error message when an invalid date is entered', function(){
 		var birthdateInput = element(by.model('birthdate'));
 		var dateInvalid = element(by.id('dateInvalid'));
-		birthdateInput.sendKeys('011/2');
+		birthdateInput.sendKeys('011/243');
+		var first = element( by.id('firstName') );
+        first.sendKeys('a');
+        browser.pause();
 		expect(dateInvalid.isDisplayed()).toEqual(true);
 	})
 
@@ -37,6 +44,14 @@ describe('Team Form page', function() {
 		var tooYoung = element(by.id('tooYoung'));
 		birthdateInput.sendKeys('01/22/2000');
 		birthdateInput.clear();
+		expect(dateInvalid.isDisplayed()).toEqual(false);
+		expect(tooYoung.isDisplayed()).toEqual(false);
+
+	})
+
+	it('should not display an error message when it is untouched', function(){
+		var dateInvalid = element(by.id('dateInvalid'));
+		var tooYoung = element(by.id('tooYoung'));
 		expect(dateInvalid.isDisplayed()).toEqual(false);
 		expect(tooYoung.isDisplayed()).toEqual(false);
 
@@ -115,18 +130,7 @@ describe('Team Form page', function() {
 	it('should not display an error befor the confirmation password input is touched', function() {
 		var noConfirmationPasswordError = element( by.id('noConfirmationPasswordError') );
 		expect( noConfirmationPasswordError.isDisplayed() ).toEqual(false);
-	})
 
-	it('should not display an error message when it is untouched', function(){
-		var dateInvalid = element(by.id('dateInvalid'));
-		var tooYoung = element(by.id('tooYoung'));
-		expect(dateInvalid.isDisplayed()).toEquals(false);
-		expect(tooYoung.isDisplayed()).toEquals(false);
-
-	})
-
-		var submitButton = element( by.id('submitButton') );
-		expect( submitButton.isEnabled() ).toEqual(false);
 	})
 
 	it('should display an error message when just a confirmation password is entered', function() {

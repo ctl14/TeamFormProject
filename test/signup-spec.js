@@ -89,29 +89,34 @@ describe('Team Form page', function() {
         expect(nameError.isDisplayed()).toEqual(false);
     })
 
+    ////////Password Tests/////////////////////////////////////////////////////////
 
 	it('should not display an error before the password input is touched', function() {
 		var noPasswordError = element( by.id('noPasswordError') );
 		expect( noPasswordError.isDisplayed() ).toEqual(false);
 	})
 
-	it('should disable the submit button when just a password is entered', function() {
+	it('should disable the submit button when all fields are valid but a password is not entered', function () {
+		var birthdateInput = element(by.model('birthdate'));
+		var nameInput = element( by.model('lastName') );
 		var passwordInput = element( by.model('password') );
-
-		passwordInput.sendKeys('password');
-
+		var confirmPasswordInput = element( by.model('confirmPassword') );
+		var emailInput = element( by.model('email') );
 		var submitButton = element( by.id('submitButton') );
-		expect( submitButton.isEnabled() ).toEqual(false);
-	})
+		var confirm = element( by.id('confirmationModal'));
 
-	it('should disable the submit button when just a password is entered then deleted', function() {
-		var passwordInput = element( by.model('password') );
+		birthdateInput.sendKeys('10/10/1010');
+		nameInput.sendKeys('a');
+		passwordInput.sendKeys('');
+		confirmPasswordInput.sendKeys('password');
+		emailInput.sendKeys('a@f.com');
+
+		expect( submitButton.isEnabled()).toEqual(false);
 
 		passwordInput.sendKeys('password');
 		passwordInput.clear();
 
-		var submitButton = element( by.id('submitButton'));
-		expect( submitButton.isEnabled() ).toEqual(false);
+		expect( submitButton.isEnabled()).toEqual(false);
 	})
 
 	it('should display an error message when just a password is entered then deleted', function() {
@@ -141,14 +146,27 @@ describe('Team Form page', function() {
 		expect( noMatchError.isDisplayed() ).toEqual(true);
 	})
 
-	it('should disable the submit button when just a confirmation password is entered then deleted', function() {
+	it('should disable the submit button when all fields are valid but a confirmation password is not entered', function () {
+		var birthdateInput = element(by.model('birthdate'));
+		var nameInput = element( by.model('lastName') );
+		var passwordInput = element( by.model('password') );
 		var confirmPasswordInput = element( by.model('confirmPassword') );
+		var emailInput = element( by.model('email') );
+		var submitButton = element( by.id('submitButton') );
+		var confirm = element( by.id('confirmationModal'));
+
+		birthdateInput.sendKeys('10/10/1010');
+		nameInput.sendKeys('a');
+		passwordInput.sendKeys('password');
+		confirmPasswordInput.sendKeys('');
+		emailInput.sendKeys('a@f.com');
+
+		expect( submitButton.isEnabled()).toEqual(false);
 
 		confirmPasswordInput.sendKeys('password');
 		confirmPasswordInput.clear();
 
-		var submitButton = element( by.id('submitButton') );
-		expect( submitButton.isEnabled() ).toEqual(false);
+		expect( submitButton.isEnabled()).toEqual(false);
 	})			
 
 	it('should display an error message when just a confirmation password is entered then deleted', function() {
@@ -163,15 +181,22 @@ describe('Team Form page', function() {
 		expect( noConfirmationPasswordError.isDisplayed() ).toEqual(true);
 	})
 
-	it('should disable the submit button when the password and confirmation password do not match', function() {
+	it('should disable the submit button when all fields are valid but the passwords do not match', function () {
+		var birthdateInput = element(by.model('birthdate'));
+		var nameInput = element( by.model('lastName') );
 		var passwordInput = element( by.model('password') );
-		var confirmPasswordInput = element( by.model('confirmPassword') ); 
+		var confirmPasswordInput = element( by.model('confirmPassword') );
+		var emailInput = element( by.model('email') );
+		var submitButton = element( by.id('submitButton') );
+		var confirm = element( by.id('confirmationModal'));
 
+		birthdateInput.sendKeys('10/10/1010');
+		nameInput.sendKeys('a');
 		passwordInput.sendKeys('password');
-		confirmPasswordInput.sendKeys('nomatch');
+		confirmPasswordInput.sendKeys('wrongpassword');
+		emailInput.sendKeys('a@f.com');
 
-		var submitButton = element( by.id('submitButton'));
-		expect( submitButton.isEnabled() ).toEqual(false);
+		expect( submitButton.isEnabled()).toEqual(false);
 	})
 
 	it('should display an error message when the password and confirmation password do not match', function() {
@@ -184,6 +209,7 @@ describe('Team Form page', function() {
 
 		expect( noMatchError.isDisplayed() ).toEqual(true);
 	})	
+
 
 	//EMAIL TESTS
 	//The user entered a valid email

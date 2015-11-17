@@ -16,28 +16,66 @@
 
 
 </head>
-<body ng-controller="TeamFormCtrl" class="container">
-<header >
-  <h1>Sign up</h1>
-  <p>Our service</p>
-</header>
-<form class="form-horizontal" name="teamForm">
 
-  <div class="form-group" ng-class="{'has-error': teamForm.birthdate.$invalid && teamForm.birthdate.$touched}">
-  <label for="birthdate">Birthdate</label><br>
-  <input type="text" class= "form-control" name="birthdate" placeholder="your birthdate" id="birthdate" ng-keyup = "ageCheck()" ng-keyup = "validDate()" ng-model = "birthdate" required>
-    <p class="help-block" ng-show="!ageCheck() && teamForm.birthdate.$touched && validDate()" >sorry, you must be at least 13 to sign up</p>
-    <p class="help-block" ng-show="!validDate() && teamForm.birthdate.$touched">please enter a valid date</p>
+<body ng-controller="TeamFormCtrl" class="container" novalidate>
+
+  <header >
+    <h1>Sign up</h1>
+    <p>Our service is awesome, but you must be 13 or older to join</p>
+  </header>
+  <form class="form-horizontal" name="teamForm" novalidate>
+
+
+
+  <div class="form-group" ng-class="{'has-error':teamForm.email.$invalid && teamForm.email.$touched}">
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email" class="form-control" ng-model="email" required>
+      <p ng-show="teamForm.email.$error.email" class="help-block">This is not a valid email address (w/o @ sign)</p>
+      <p ng-show="teamForm.email.$touched && teamForm.email.$error.required" class="help-block">You must enter a valid email address (when user touches but doesn't enter anything)</p>
     </div>
 
-  <br>
 
-  <div class="alert alert-success" ng-hide="submitted">
-    Content has been submitted
-  </div>
-  <button type="reset" class="btn" ng-click="reset()">Reset</button>
-  <button type="submit" class="btn btn-primary" ng-click="submit()" ng-disabled="teamForm.$invalid">Sign Me Up!</button>
-</form>
+
+    <div class="form-group">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" name="firstName" id="firstName" placeholder="your first name">
+    </div>
+
+
+
+    <div class="form-group" ng-class="{'has-error': teamForm.lastName.$invalid && teamForm.lastName.$touched}">
+      <label for="lastName">Last Name</label>
+      <input type="text" class="form-control" name="lastName" id="lastName" placeholder="your last name" ng-model="lastName" required ng-minlength="1">
+      <p class="help-block" ng-show="teamForm.lastName.$invalid && teamForm.lastName.$touched">We need to know your last name</p>
+    </div>
+
+    <div class="alert alert-success" ng-hide="submitted">
+      Content has been submitted
+    </div>
+
+    <div class="form-group" ng-class="{'has-error':teamForm.birthdate.$invalid && teamForm.birthdate.$touched}">
+      <label for="birthdate">Birthdate</label>
+      <input type="text" class= "form-control" name="birthdate" placeholder="your birthdate" id="birthdate" ng-keyup = "ageCheck()" ng-keyup = "validDate()" ng-model = "birthdate" required>
+      <p class="help-block" ng-show="!ageCheck() && teamForm.birthdate.$touched && validDate()" >sorry, you must be at least 13 to sign up</p>
+      <p class="help-block" ng-show="!validDate() && teamForm.birthdate.$touched">please enter a valid date</p>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error':teamForm.password.$invalid && teamForm.password.$touched}">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" class="form-control" placeholder="Your Password" ng-model="password" ng-change="verifyPassword()" required>
+      <p ng-show="teamForm.password.$invalid && teamForm.password.$touched" class="help-block" id="noPasswordError">Please enter a password</p>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error':teamForm.confirmPassword.$invalid && teamForm.confirmPassword.$touched}">
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm Your Password" ng-model="confirmPassword" ng-change="verifyPassword()" required>
+      <p ng-show="teamForm.confirmPassword.$error.text" class="help-block" id="noConfirmationPasswordError">Please re-type your password</p>
+      <p ng-show="teamForm.confirmPassword.$error.match" class="help-block" id="noMatchError">Passwords don't match</p>
+    </div>
+
+    <button type="reset" class="btn" ng-click="reset()">Reset</button>
+    <button type="submit" class="btn btn-primary" ng-click="submit(teamForm)" ng-disabled="teamForm.$invalid">Sign Me Up!</button>
+  </form>
 
 <script src="js/app.js"></script>
 </body>

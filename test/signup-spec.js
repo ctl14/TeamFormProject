@@ -104,4 +104,50 @@ describe('Team Form page', function() {
 		var submitButton = element( by.id('submitButton'));
 		expect( submitButton.isEnabled() );
 	})
+
+
+
+	//EMAIL TESTS
+	//The user entered a valid email
+	it('should not say: This is not a valid email address', function() {
+		var emailInput = element( by.model('email') );
+		var noAtSignMsg = element( by.id('noAtSignMsg') ); 
+
+		emailInput.sendKeys('husky@uw.edu');
+
+
+		expect( !noAtSignMsg.isDisplayed() );
+	})
+	//The user entered a valid email
+	it('should not say: You must enter a valid email', function() {
+		var emailInput = element( by.model('email') );
+		var noInputMsg = element( by.id('noInputMsg') ); 
+
+		emailInput.sendKeys('husky@uw.edu');
+
+
+		expect( !noInputMsg.isDisplayed() );
+	})
+
+	//The user did not input an @ sign
+	it('should activate: This is not a valid email address', function() {
+		var emailInput = element( by.model('email') );
+		var noAtSignMsg = element( by.id('noAtSignMsg') ); 
+
+		emailInput.sendKeys('husky');
+
+
+		expect( noAtSignMsg.isDisplayed() );
+	})
+
+	//The user did not enter anything
+	it('should activate: You must enter a valid email', function() {
+		var emailInput = element( by.model('email') );
+		var noInputMsg = element( by.id('noInputMsg') ); 
+
+		emailInput.sendKeys('');
+
+
+		expect( noInputMsg.isDisplayed() );
+	})
 });

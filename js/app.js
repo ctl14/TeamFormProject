@@ -15,20 +15,19 @@ angular.module('TeamFormApp', [])
         location.reload();
     };
 
-//<<<<<<< HEAD
     $scope.ageCheck = function () {
+        //checks if the birthdate entered is over 13
         var birthdate = Date.parse($scope.birthdate);
         var oldEnough = (Date.now()-410240038000);
         if(birthdate <= oldEnough){
-            console.log("old enough");
             return true;
         }else{
-            console.log("Too Young");
             return false;
         }
     };
 
         $scope.validDate = function () {
+            //checks if birthdate is valid meaning a non Nan
             var birthdate = Date.parse($scope.birthdate);
             if(isNaN(birthdate)){
                 return false;
@@ -37,11 +36,6 @@ angular.module('TeamFormApp', [])
             }
         };
 
-
-
-
-
-//=======
     $scope.verifyPassword = function() {
     	if(!$scope.teamForm.confirmPassword.$pristine) {
     		console.log($scope.confirmPassword);
@@ -62,5 +56,5 @@ angular.module('TeamFormApp', [])
 	    	}
 	    }
     }
-//>>>>>>> dfffb5952d2933f0b795fc3a7ab56cfa21c34ca6
+
 }]);

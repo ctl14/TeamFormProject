@@ -22,6 +22,11 @@
     <h1>Sign up</h1>
     <p>Our service is awesome, but you must be 13 or older to join</p>
   </header>
+
+  <div class="alert alert-success" ng-hide="submitted">
+    Content has been submitted
+  </div>
+
   <form class="form-horizontal" name="teamForm" novalidate>
 
 
@@ -50,9 +55,7 @@
       <p class="help-block" id="nameError" ng-show="teamForm.lastName.$invalid && teamForm.lastName.$touched">We need to know your last name</p>
     </div>
 
-    <div class="alert alert-success" ng-hide="submitted">
-      Content has been submitted
-    </div>
+
 
     <div class="form-group" ng-class="{'has-error':teamForm.birthdate.$invalid && teamForm.birthdate.$touched}">
       <label for="birthdate">Birthdate</label>

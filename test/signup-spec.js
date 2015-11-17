@@ -4,13 +4,44 @@ describe('Team Form page', function() {
 	beforeEach(function() {
 		browser.get('http://localhost:8000/');
 	})
+	
+	it('should display an error message when the last name field has been touched but has no input', function() {
+        var nameInput = element( by.model('lastName') );
+
+        nameInput.sendKeys('a');
+        nameInput.clear();
+
+        var nameError = element( by.id('nameError') );
+        expect(nameError.isDisplayed());
+    })
+
+    it('should not display an error message when nothing has been touched', function() {
+        var nameError = element( by.id('nameError') );
+        expect(!nameError.isDisplayed());
+    })
+
+    it('should not display an error message when the last name filed has an input', function() {
+        var nameInput = element( by.model('lastName') );
+
+        nameInput.sendKeys('a');
+
+        var nameError = element( by.id('nameError') );
+        expect(!nameError.isDisplayed());
+    })
+
+	//////////////////////////////////////////////////////
+
+	it('should not display an error befor the password input is touched', function() {
+		var noPasswordError = element( by.id('noPasswordError') );
+		expect( !noPasswordError.isDisplayed() );
+	})
 
 	it('should disable the submit button when just a password is entered', function() {
 		var passwordInput = element( by.model('password') );
 
 		passwordInput.sendKeys('password');
 
-		var submitButton = element( by.id('submitButton'));
+		var submitButton = element( by.id('submitButton') );
 		expect( !submitButton.isEnabled() );
 	})
 
@@ -32,6 +63,11 @@ describe('Team Form page', function() {
 		passwordInput.clear();
 
 		expect( noPasswordError.isDisplayed() );
+	})
+
+	it('should not display an error befor the confirmation password input is touched', function() {
+		var noConfirmationPasswordError = element( by.id('noConfirmationPasswordError') );
+		expect( !noConfirmationPasswordError.isDisplayed() );
 	})
 
 	it('should disable the submit button when just a confirmation password is entered', function() {

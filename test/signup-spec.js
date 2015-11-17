@@ -5,12 +5,17 @@ describe('Team Form page', function() {
 		browser.get('http://localhost:8000/');
 	})
 
+	it('should not display an error befor the password input is touched', function() {
+		var noPasswordError = element( by.id('noPasswordError') );
+		expect( !noPasswordError.isDisplayed() );
+	})
+
 	it('should disable the submit button when just a password is entered', function() {
 		var passwordInput = element( by.model('password') );
 
 		passwordInput.sendKeys('password');
 
-		var submitButton = element( by.id('submitButton'));
+		var submitButton = element( by.id('submitButton') );
 		expect( !submitButton.isEnabled() );
 	})
 
@@ -32,6 +37,11 @@ describe('Team Form page', function() {
 		passwordInput.clear();
 
 		expect( noPasswordError.isDisplayed() );
+	})
+
+	it('should not display an error befor the confirmation password input is touched', function() {
+		var noConfirmationPasswordError = element( by.id('noConfirmationPasswordError') );
+		expect( !noConfirmationPasswordError.isDisplayed() );
 	})
 
 	it('should disable the submit button when just a confirmation password is entered', function() {

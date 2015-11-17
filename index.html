@@ -45,7 +45,7 @@
     <div class="form-group" ng-class="{'has-error': teamForm.lastName.$invalid && teamForm.lastName.$touched}">
       <label for="lastName">Last Name</label>
       <input type="text" class="form-control" name="lastName" id="lastName" placeholder="your last name" ng-model="lastName" required ng-minlength="1">
-      <p class="help-block" ng-show="teamForm.lastName.$invalid && teamForm.lastName.$touched">We need to know your last name</p>
+      <p class="help-block" id="nameError" ng-show="teamForm.lastName.$invalid && teamForm.lastName.$touched">We need to know your last name</p>
     </div>
 
     <div class="alert alert-success" ng-hide="submitted">
@@ -73,7 +73,9 @@
     </div>
 
     <button type="reset" class="btn" ng-click="reset()">Reset</button>
-    <button type="submit" class="btn btn-primary" ng-click="submit(teamForm)" ng-disabled="teamForm.$invalid" id="submitButton">Sign Me Up!</button>
+
+    <button type="submit" id="submitButton" class="btn btn-primary" ng-click="submit(teamForm)" ng-disabled="teamForm.$invalid">Sign Me Up!</button>
+
   </form>
 
 <script src="js/app.js"></script>

@@ -4,6 +4,32 @@ describe('Team Form page', function() {
 	beforeEach(function() {
 		browser.get('http://localhost:8000/');
 	})
+	
+	it('should display an error message when the last name field has been touched but has no input', function() {
+        var nameInput = element( by.model('lastName') );
+
+        nameInput.sendKeys('a');
+        nameInput.clear();
+
+        var nameError = element( by.id('nameError') );
+        expect(nameError.isDisplayed());
+    })
+
+    it('should not display an error message when nothing has been touched', function() {
+        var nameError = element( by.id('nameError') );
+        expect(!nameError.isDisplayed());
+    })
+
+    it('should not display an error message when the last name filed has an input', function() {
+        var nameInput = element( by.model('lastName') );
+
+        nameInput.sendKeys('a');
+
+        var nameError = element( by.id('nameError') );
+        expect(!nameError.isDisplayed());
+    })
+
+	//////////////////////////////////////////////////////
 
 	it('should not display an error befor the password input is touched', function() {
 		var noPasswordError = element( by.id('noPasswordError') );

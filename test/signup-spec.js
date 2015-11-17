@@ -256,4 +256,25 @@ describe('Team Form page', function() {
 
 
 	})
+
+	it('should disable the submit button if the Last Name field is invalid', function() {
+		var birthdateInput = element(by.model('birthdate'));
+		var nameInput = element( by.model('lastName') );
+		var passwordInput = element( by.model('password') );
+		var confirmPasswordInput = element( by.model('confirmPassword') );
+		var emailInput = element( by.model('email') );
+		var submitButton = element( by.id('submitButton') );
+
+
+		birthdateInput.sendKeys('10/10/1010');
+		nameInput.sendKeys('');
+		passwordInput.sendKeys('password');
+		confirmPasswordInput.sendKeys('password');
+		emailInput.sendKeys('a@f.com');
+
+		expect( submitButton.isEnabled()).toEqual(false);
+
+
+	})
+
 });

@@ -40,6 +40,10 @@ describe('Team Form page', function() {
 		expect(dateInvalid.isDisplayed()).toEqual(false);
 		expect(tooYoung.isDisplayed()).toEqual(false);
 
+	})
+
+	//////////////////////////////////////////////////
+
 	it('should display an error message when the last name field has been touched but has no input', function() {
         var nameInput = element( by.model('lastName') );
         var first = element( by.id('firstName') );
@@ -134,7 +138,7 @@ describe('Team Form page', function() {
 		expect( noMatchError.isDisplayed() ).toEqual(true);
 	})
 
-	it('should disable the submit button when just a confirmation password is entered then delted', function() {
+	it('should disable the submit button when just a confirmation password is entered then deleted', function() {
 		var confirmPasswordInput = element( by.model('confirmPassword') );
 
 		confirmPasswordInput.sendKeys('password');

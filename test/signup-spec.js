@@ -7,26 +7,33 @@ describe('Team Form page', function() {
 	
 	it('should display an error message when the last name field has been touched but has no input', function() {
         var nameInput = element( by.model('lastName') );
+        var first = element( by.id('firstName') );
 
         nameInput.sendKeys('a');
         nameInput.clear();
+        first.sendKeys('a');
 
         var nameError = element( by.id('nameError') );
-        expect(nameError.isDisplayed());
+        expect(nameError.isDisplayed()).toEqual(true);
     })
 
-    it('should not display an error message when nothing has been touched', function() {
+    it('should not display an error message when Last Name has been touched', function() {
+        var first = element( by.id('firstName') );
+        first.sendKeys('a');
+
         var nameError = element( by.id('nameError') );
-        expect(!nameError.isDisplayed());
+        expect(nameError.isDisplayed()).toEqual(false);
     })
 
-    it('should not display an error message when the last name filed has an input', function() {
+    it('should not display an error message when the last name field has an input', function() {
         var nameInput = element( by.model('lastName') );
+        var first = element( by.id('firstName') );
 
         nameInput.sendKeys('a');
+        first.sendKeys('a');
 
         var nameError = element( by.id('nameError') );
-        expect(!nameError.isDisplayed());
+        expect(nameError.isDisplayed()).toEqual(false);
     })
 
 	//////////////////////////////////////////////////////
@@ -134,4 +141,47 @@ describe('Team Form page', function() {
 		expect( noMatchError.isDisplayed() ).toEqual(true);
 	})	
 
+	//EMAIL TESTS
+	//The user entered a valid email
+	it('should not say: This is not a valid email address', function() {
+		var emailInput = element( by.model('email') );
+		var noAtSignMsg = element( by.id('noAtSignMsg') ); 
+
+		emailInput.sendKeys('husky@uw.edu');
+
+
+		expect( !noAtSignMsg.isDisplayed() );
+	})
+	//The user entered a valid email
+	it('should not say: You must enter a valid email', function() {
+		var emailInput = element( by.model('email') );
+		var noInputMsg = element( by.id('noInputMsg') ); 
+
+		emailInput.sendKeys('husky@uw.edu');
+
+
+		expect( !noInputMsg.isDisplayed() );
+	})
+
+	//The user did not input an @ sign
+	it('should activate: This is not a valid email address', function() {
+		var emailInput = element( by.model('email') );
+		var noAtSignMsg = element( by.id('noAtSignMsg') ); 
+
+		emailInput.sendKeys('husky');
+
+
+		expect( noAtSignMsg.isDisplayed() );
+	})
+
+	//The user did not enter anything
+	it('should activate: You must enter a valid email', function() {
+		var emailInput = element( by.model('email') );
+		var noInputMsg = element( by.id('noInputMsg') ); 
+
+		emailInput.sendKeys('');
+
+
+		expect( noInputMsg.isDisplayed() );
+	})
 });

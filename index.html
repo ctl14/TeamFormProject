@@ -59,9 +59,10 @@
 
   <div class="form-group" ng-class="{'has-error':teamForm.birthdate.$invalid && teamForm.birthdate.$touched}">
     <label for="birthdate">Birthdate</label>
-    <input type="text" class= "form-control" name="birthdate" placeholder="your birthdate" id="birthdate" ng-keyup = "verifyBirthdate()" ng-model = "birthdate" required>
+    <input type="text" class= "form-control" name="birthdate" placeholder="your birthdate" id="birthdate" ng-change = "verifyBirthdate()" ng-model = "birthdate" required>
     <p class="help-block" ng-show="teamForm.birthdate.$error.age && teamForm.birthdate.$touched" id="tooYoung" >sorry, you must be at least 13 to sign up</p>
     <p class="help-block" ng-show="teamForm.birthdate.$error.format && teamForm.birthdate.$touched" id="dateInvalid">please enter a valid date</p>
+    <p class="help-block" ng-show="!teamForm.birthdate.$error.format && teamForm.birthdate.$touched && !teamForm.birthdate.$error.age && teamForm.birthdate.$invalid" id="dateMissing">please enter a valid date</p>
   </div>
 
   <div class="form-group" ng-class="{'has-error':teamForm.password.$invalid && teamForm.password.$touched}">

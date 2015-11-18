@@ -75,6 +75,7 @@
     <input type="password" name="confirmPassword" id="confirmPassword" class="form-control" placeholder="Confirm Your Password" ng-model="confirmPassword" ng-change="verifyPassword()" required>
     <p ng-show="teamForm.confirmPassword.$error.text" class="help-block" id="noConfirmationPasswordError">Please re-type your password</p>
     <p ng-show="teamForm.confirmPassword.$error.match" class="help-block" id="noMatchError">Passwords don't match</p>
+    <p ng-show="teamForm.confirmPassword.$touched && teamForm.confirmPassword.$error.required" class="help-block" id="noConfirmationPasswordEntered">Please re-type your password</p>
   </div>
 
   <button type="reset" class="btn" ng-click="reset()">Reset</button>

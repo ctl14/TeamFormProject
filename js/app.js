@@ -4,16 +4,19 @@ angular.module('TeamFormApp', [])
     .controller('TeamFormCtrl', ['$scope', function($scope) {
         $scope.submitted = true;
 
+        //When the submit button is pressed, show submission confirmation
         $scope.submit = function(form) {
             if(form.$valid) {
                 $scope.submitted = false;
             }
         };
 
+        //When the reset button is pressed, clear the form
         $scope.reset = function() {
-
             location.reload();
         };
+
+        //Verify birthdate input and show appropriate errors if necessary
         $scope.verifyBirthdate = function () {
             var enteredBirthdate = Date.parse($scope.birthdate);
             var oldEnough = (Date.now()-410240038000);
@@ -37,6 +40,7 @@ angular.module('TeamFormApp', [])
             }
         };
 
+        //Verify password inputs and show appropriate errors if necessary
         $scope.verifyPassword = function() {
             if(!$scope.teamForm.confirmPassword.$pristine) {
                 console.log($scope.confirmPassword);
